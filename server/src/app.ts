@@ -16,6 +16,13 @@ app.use((request, response, next) => {
     // the express app is open and in middleware2
     console.log('Hello world');
     next();
+});
+
+app.use((request, response, next) => {
+    response.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
+    response.setHeader('Access-Control-Allow-Headers', 'content-type')
+    response.setHeader('Access-Control-Allow-Methods', 'GET POST');
+    next();
 })
 
 

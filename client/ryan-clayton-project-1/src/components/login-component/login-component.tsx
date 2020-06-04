@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { validate } from '../../remote/login-remote';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router';
 
 
 
-const LoginComponent: React.FC = () => {
-    const authenticate = (credentials:any)=>{
-        validate(credentials);
+const LoginComponent: React.FC<RouteComponentProps> = (props) => {
+
+    console.log(props);
+    let history = props.history;
+    let [username, setUsername]=useState('');
+    let [password, setPassword]=useState('');  
+    let [role ,setRole]=useState('')
+     
+    const authenticate = ()=>{
+        console.log(username,password);
+        validate({ers_username:username,ers_password:password}).then(response=>{
+            setRole(response);
+            
+        }).catch();
+        if (role ==="MANAGER"){
+            history.push('/manager');
+        }else if(role==="EMPLOYEE"){
+            history.push('/employee');
+        }
+        console.log(role)
+
     }
-    const [username, setUsername]=useState('');
-    const [password, setPassword]=useState('');   
 
-    useEffect(() => {
-    }, [])
     
     return (
 
@@ -27,11 +42,12 @@ const LoginComponent: React.FC = () => {
                         </input>
                     </div>
                     <div className='col'>
-                        <button type='submit' onClick={()=>authenticate({ers_username:username,ers_password:password})}>Submit</button>
+                        
                     </div>
                 </div>
             </form>
+            <button type='submit' onClick={authenticate}>Submit</button>
         </section>)
 }
 
-export default LoginComponent;
+export default withRouter(LoginComponent);
