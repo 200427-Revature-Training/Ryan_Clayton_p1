@@ -1,6 +1,8 @@
 import React from 'react';
-import {Link, withRouter, RouteComponentProps} from 'react-router-dom';
+import {Link, withRouter, RouteComponentProps, Redirect} from 'react-router-dom';
 import { render } from '@testing-library/react';
+import { Button } from 'react-bootstrap';
+import './header.css'
 
 interface NavbarProps{
     history: History;
@@ -11,7 +13,13 @@ const HeaderComponent: React.FC<RouteComponentProps> = (props) => {
         return path === props.location.pathname ?
         <span className="sr-only">(current)</span>:<span></span>
     }
-    
+    const logout = ()=>{
+        localStorage.setItem('role','');
+        localStorage.setItem('token','');
+        props.history.push('/login');
+
+    }
+
     return (
         <nav className="navbar navbar-dark bg-dark">
             <a className="navbar-brand" href="#">Reimbursement Request Manager</a>
@@ -21,13 +29,16 @@ const HeaderComponent: React.FC<RouteComponentProps> = (props) => {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item active">
-                        <Link to="./">Home {renderOnCurrentPath('/home')}<span className="sr-only">(current)</span></Link>
+                        <Link className='nav-links' to="./">Home {renderOnCurrentPath('/home')}<span className="sr-only">(current)</span></Link>
                     </li>
                     <li className="nav-item">
-                    <Link to="/manager/previous">View Previous Requests{renderOnCurrentPath('/previous')}</Link>
+                    <Link className='nav-links' to="/manager/previous">View Previous Requests{renderOnCurrentPath('/previous')}</Link>
                     </li>
                     <li className="nav-item">
-                    <Link to="/manager">Create New Request{renderOnCurrentPath('/manager')}</Link>
+                    <Link className='nav-links' to="/manager">Create New Request{renderOnCurrentPath('/manager')}</Link>
+                    </li>
+                    <li>
+                        <Button className='btn-dark' onClick={logout}>Logout</Button>
                     </li>
                 </ul>
             </div>
