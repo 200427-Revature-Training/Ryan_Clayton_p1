@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import EmployeeCard from './employee-card';
 import { Modal, Button, Form } from 'react-bootstrap';
+import HeaderComponent from '../architecture/header-component';
 
 
 
@@ -41,15 +42,17 @@ const EmployeeHome: React.FC = () => {
 
                 </Modal.Footer>
             </Modal>
+            <HeaderComponent></HeaderComponent>
             <br></br>
-            <div className="container">
-                <div className='row float-right'>
-                    <Button className="btn-dark" onClick={() => setModalShow(true)}>Create New Request</Button>
+
+            <div className="container" style={{flexDirection: 'row'}}>
+                <div className='row' >
+                    <Button className="col btn-dark" onClick={() => setModalShow(true)}>Create New Request</Button>
                 </div>
                 <div className="row">
-                    <div className="col"><EmployeeCard></EmployeeCard></div>
-                    <div className="col"><EmployeeCard></EmployeeCard></div>
-                    <div className="col"><EmployeeCard></EmployeeCard></div>
+                    <div className="col-4"><EmployeeCard></EmployeeCard></div>
+                    <div className="col-4"><EmployeeCard></EmployeeCard></div>
+                    <div className="col-4"><EmployeeCard></EmployeeCard></div>
 
                 </div>
             </div>

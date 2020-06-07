@@ -12,7 +12,6 @@ const MainComponent: React.FC = () => {
   return (
     <BrowserRouter>
       <div className="App">
-        <HeaderComponent></HeaderComponent>
         <main>
           <Switch>
             <Route path="/login">

@@ -19,7 +19,7 @@ const HeaderComponent: React.FC<RouteComponentProps> = (props) => {
         props.history.push('/login');
 
     }
-
+    const previousRequests = props.location.pathname+"/previous"
     return (
         <nav className="navbar navbar-dark bg-dark">
             <a className="navbar-brand" href="#">Reimbursement Request Manager</a>
@@ -29,10 +29,10 @@ const HeaderComponent: React.FC<RouteComponentProps> = (props) => {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item active">
-                        <Link className='nav-links' to="./">Home {renderOnCurrentPath('/home')}<span className="sr-only">(current)</span></Link>
+                        <Link className='nav-links' to="/login">Home {renderOnCurrentPath('/home')}<span className="sr-only">(current)</span></Link>
                     </li>
                     <li className="nav-item">
-                    <Link className='nav-links' to="/manager/previous">View Previous Requests{renderOnCurrentPath('/previous')}</Link>
+                    <Link className='nav-links' to={previousRequests}>View Previous Requests{renderOnCurrentPath('/previous')}</Link>
                     </li>
                     <li className="nav-item">
                     <Link className='nav-links' to="/manager">Create New Request{renderOnCurrentPath('/manager')}</Link>
