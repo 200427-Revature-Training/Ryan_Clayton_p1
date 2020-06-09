@@ -1,6 +1,6 @@
 import { internalAxios } from './internal-axios'
 
-export const validate = async (credentials: any) => {
+export const login = async (credentials: any) => {
 
   let role = await internalAxios.post('/login', credentials)
     .then((response) => {
