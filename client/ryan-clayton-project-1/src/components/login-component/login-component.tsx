@@ -9,32 +9,31 @@ const LoginComponent: React.FC<RouteComponentProps> = (props) => {
     let history = props.history;
     let [username, setUsername]=useState('');
     let [password, setPassword]=useState('');  
-    let [role ,setRole]=useState('')
      
     const authenticate = ()=>{
-        console.log(localStorage.getItem('token'));
-        validate({ers_username:username,ers_password:password})
-        .then(response=>{
-            console.log(response);
 
-            setRole(response);
-            
-        })
+
+        console.log(localStorage.getItem('token'));
+
+        //logs the user in
+        validate({ers_username:username,ers_password:password})
+        .then()
         .catch();
-        
-        if (role ==="MANAGER"){
-            localStorage.setItem('role',role);
+
+        //if the user has valid credentials, redirect to their respective page
+        if (localStorage.getItem('role') ==="MANAGER"){
             history.push('/manager');
-        }else if(role==="EMPLOYEE"){
-            localStorage.setItem('role',role);
+        }else if(localStorage.getItem('role')==="EMPLOYEE"){
             history.push('/employee');
         }else{
             localStorage.setItem('role','');
             localStorage.setItem('token','');
         }
-        console.log(role)
+
 
     }
+
+    //if the user somehow landed on the login screen and already has a valid role, redirect them to the landing page
     if (localStorage.getItem('role')=='MANAGER'){
         return <Redirect to = '/manager'/>
     }else if (localStorage.getItem('role')=='EMPLOYEE'){

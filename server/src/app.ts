@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { db } from './daos/db';
 import { loginRouter } from './routers/login-router';
+import { ContentRouter } from './routers/content-router';
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use((request, response, next) => {
 /*Routers!!*/
 
 app.use('/login',loginRouter);
+app.use('/requests',ContentRouter);
 
 
 
