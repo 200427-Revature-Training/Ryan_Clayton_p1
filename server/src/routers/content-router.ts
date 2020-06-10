@@ -2,6 +2,7 @@ import express from 'express';
 import * as contentService from '../services/content-service';
 
 import {checkAuth} from '../middleware/check-auth';
+import { checkManager } from '../middleware/check-manager';
 
 export const ContentRouter = express.Router(); // create + export express router
 
@@ -10,7 +11,7 @@ export const ContentRouter = express.Router(); // create + export express router
 
     add checkAuth, as middleware to ensure routes are protected
 */
-ContentRouter.get('', checkAuth, (request, response , next) => {
+ContentRouter.post('', checkAuth, checkManager,(request, response , next) => {
     contentService.postContent().then(content=>{
         response.status(200).json(content);
         next();
@@ -21,7 +22,7 @@ ContentRouter.get('', checkAuth, (request, response , next) => {
 });
 
 
-ContentRouter.get('/:id',  (request, response , next) => {
+ContentRouter.post('/:id',  (request, response , next) => {
     const id = +request.params.id;
     contentService.postContentID(id).then(content=>{
         response.status(200).json(content);

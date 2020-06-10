@@ -3,7 +3,7 @@ export class Content {
     reimb_amount: number;
     reimb_submitted: Date;
     reimb_resolved: Date;
-    reimb_desription: string;
+    reimb_description: string;
     reimb_receipt: Blob;
     reimb_author: number;
     reimb_resolver: number;
@@ -13,7 +13,7 @@ export class Content {
     static from(obj: ContentRow) {
         const content = new Content(
                obj.reimb_id, obj.reimb_amount,obj.reimb_submitted,obj.reimb_resolved,
-               obj.reimb_desription, obj.reimb_receipt, obj.reimb_author,obj.reimb_resolver,
+               obj.reimb_description, obj.reimb_receipt, obj.reimb_author,obj.reimb_resolver,
                obj.reimb_status_id, obj.reimb_type_id
             );
         return content
@@ -22,7 +22,7 @@ export class Content {
         reimbAmount: number,
         reimbSubmitted: Date,
         reimbResolved: Date,
-        reimbDesription: string,
+        reimbDescription: string,
         reimbReceipt: Blob,
         reimbAuthor: number,
         reimbResolver: number,
@@ -32,7 +32,7 @@ export class Content {
         this.reimb_amount = reimbAmount
         this.reimb_submitted = reimbSubmitted
         this.reimb_resolved = reimbResolved
-        this.reimb_desription = reimbDesription
+        this.reimb_description = reimbDescription
         this.reimb_receipt = reimbReceipt
         this.reimb_author = reimbAuthor
         this.reimb_resolver = reimbResolver
@@ -45,7 +45,7 @@ export interface ContentRow {
     reimb_amount: number,
     reimb_submitted: Date,
     reimb_resolved: Date,
-    reimb_desription: string,
+    reimb_description: string,
     reimb_receipt: Blob,
     reimb_author: number,
     reimb_resolver: number,

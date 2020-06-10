@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup'
 import ManagerCard from './manager-card';
 import './manager.css';
 import { Modal, Button, Form } from 'react-bootstrap';
 import FormControl from 'react-bootstrap/FormControl'
 import HeaderComponent from '../architecture/header-component';
+import { getContent } from '../../remote/content-remote';
 
 
 const ManagerHome: React.FC = (props) => {
     const [modalShow, setModalShow] = useState(false);
+    const [data, setData] = useState<any[]>([]);
+    
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            const result = await getContent({ token: localStorage.getItem('token') });
+
+            setData(result.data);
+        };
+        fetchData(); 
+    },[]);
 
 
+    
+    
     return (
-
+        
 
         <section>
             <Modal
@@ -63,11 +76,8 @@ const ManagerHome: React.FC = (props) => {
                     <Button className="col-12 btn-dark" onClick={() => setModalShow(true)}>Create New Request</Button>
                 </div>
                 <div className="row">
-                    <div className="col-4"><ManagerCard></ManagerCard></div>
-                    <div className="col-4"><ManagerCard></ManagerCard></div>
-                    <div className="col-4"><ManagerCard></ManagerCard></div>
-                    <div className="col-4"><ManagerCard></ManagerCard></div>
-                    <div className="col-4"><ManagerCard></ManagerCard></div>
+                {data.map((e,i)=>{return <ManagerCard key={i} content={e}></ManagerCard>})}
+
 
 
                 </div>

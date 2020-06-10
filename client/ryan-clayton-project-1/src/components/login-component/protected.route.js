@@ -8,7 +8,6 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
             {...rest}
             render={props => {
                 if (localStorage.getItem('token')&&props.location.pathname.split('/')[1].toLocaleUpperCase()===localStorage.getItem('role')) {
-                    
                     return <Component {...props} />
                 }
                 else {

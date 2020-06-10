@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import EmployeeCard from './employee-card';
 import { Modal, Button, Form } from 'react-bootstrap';
 import HeaderComponent from '../architecture/header-component';
+import { getContentID } from '../../remote/content-remote';
 
 
 
 const EmployeeHome: React.FC = () => {
     const [modalShow, setModalShow] = useState(false);
+    const [data, setData] = useState<any[]>([]);
+
+
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            const result = await getContentID({ token: localStorage.getItem('token') },2);
+
+            setData(result.data);
+        };
+        fetchData(); 
+    },[]);
 
     return (
 
@@ -20,7 +32,7 @@ const EmployeeHome: React.FC = () => {
                 <Modal.Header closeButton>
                     <Modal.Title id="example-modal-sizes-title-lg">
                         New Reimbursement Request
-      </Modal.Title>
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -45,14 +57,13 @@ const EmployeeHome: React.FC = () => {
             <HeaderComponent></HeaderComponent>
             <br></br>
 
-            <div className="container" style={{flexDirection: 'row'}}>
+            <div className="container" style={{ flexDirection: 'row' }}>
                 <div className='row' >
                     <Button className="col btn-dark" onClick={() => setModalShow(true)}>Create New Request</Button>
                 </div>
                 <div className="row">
-                    <div className="col-4"><EmployeeCard></EmployeeCard></div>
-                    <div className="col-4"><EmployeeCard></EmployeeCard></div>
-                    <div className="col-4"><EmployeeCard></EmployeeCard></div>
+                {data.map(e=>{return <div className="col-4"><EmployeeCard key={e.reimb_id} content={e}></EmployeeCard></div>})}
+
 
                 </div>
             </div>

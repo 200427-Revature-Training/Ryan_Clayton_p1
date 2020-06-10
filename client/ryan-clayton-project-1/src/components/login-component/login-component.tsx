@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { login } from '../../remote/login-remote';
 import { Redirect, RouteComponentProps, withRouter } from 'react-router';
 import './login-page.css'
@@ -17,27 +17,27 @@ const LoginComponent: React.FC<RouteComponentProps> = (props) => {
 
         //logs the user in
         login({ ers_username: username, ers_password: password })
-            .then(response => {
+            .then(role => {
                 //if the user has valid credentials, redirect to their respective page
-                if (response === "MANAGER") {
+                if (role === "MANAGER") {
                     history.push('/manager');
-                } else if (response === "EMPLOYEE") {
+                } else if (role === "EMPLOYEE") {
                     history.push('/employee');
                 } else {
                     localStorage.setItem('role', '');
                     localStorage.setItem('token', '');
-                }
-            })
-            .catch();
-        }
-    /*
+            }
+        })
+        .catch();
+    }
+    
         //if the user somehow landed on the login screen and already has a valid role, redirect them to the landing page
-        if (localStorage.getItem('role')=='MANAGER'){
+        if (localStorage.getItem('role')==='MANAGER'){
             return <Redirect to = '/manager'/>
-        }else if (localStorage.getItem('role')=='EMPLOYEE'){
+        }else if (localStorage.getItem('role')==='EMPLOYEE'){
             return <Redirect to = '/employee'/>
         }
-    */
+    
 
     return (
 
@@ -48,7 +48,9 @@ const LoginComponent: React.FC<RouteComponentProps> = (props) => {
                     <form>
 
                         <div className='col'>
-                            <img src='https://revature.com/wp-content/uploads/2017/08/rev-logo-2.png'></img>
+                        <a href="https://revature.com/wp-content/uploads/2017/08/rev-logo-2.png">
+                            <img src='https://revature.com/wp-content/uploads/2017/08/rev-logo-2.png' alt = ''></img>
+                        </a>
                         </div>
                         <br></br>
                         <div className='col'>

@@ -1,6 +1,5 @@
 import React from 'react';
-import {Link, withRouter, RouteComponentProps, Redirect} from 'react-router-dom';
-import { render } from '@testing-library/react';
+import {Link, withRouter, RouteComponentProps} from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import './header.css'
 
@@ -22,7 +21,7 @@ const HeaderComponent: React.FC<RouteComponentProps> = (props) => {
     const previousRequests = props.location.pathname+"/previous"
     return (
         <nav className="navbar navbar-dark bg-dark">
-            <a className="navbar-brand" href="#">Reimbursement Request Manager</a>
+            <a className="navbar-brand" href="/login">Reimbursement Request Manager</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
