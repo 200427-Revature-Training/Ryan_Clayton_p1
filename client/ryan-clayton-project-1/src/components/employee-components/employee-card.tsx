@@ -1,4 +1,5 @@
 import React from 'react';
+import './employee.css'
 
 
 interface CardProps {
@@ -6,9 +7,10 @@ interface CardProps {
     key: Number;
 }
 const EmployeeCard: React.FC<CardProps> = (props) => {
-    console.log(props.content);
-    return (
 
+
+
+    return (
         <div className="col-4">
             <div className="card" style={{ width: '18rem' }}>
                 <div className="card-body">
@@ -16,7 +18,7 @@ const EmployeeCard: React.FC<CardProps> = (props) => {
                     <h6 className="card-subtitle mb-2 text-muted">${props.content.reimb_amount}.00</h6>
                     <p className="card-text">{props.content.reimb_description}</p>
                     <p className="card-text">{props.content.reimb_status}</p>
-
+                    <img id = 'img' src= {props.content.reimb_receipt}></img>
                 </div>
             </div>
         </div>)

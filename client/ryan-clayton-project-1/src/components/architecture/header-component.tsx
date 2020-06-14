@@ -3,9 +3,6 @@ import {Link, withRouter, RouteComponentProps} from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import './header.css'
 
-interface NavbarProps{
-    history: History;
-}
 
 const HeaderComponent: React.FC<RouteComponentProps> = (props) => {
     const renderOnCurrentPath = (path:string)=>{
@@ -33,11 +30,8 @@ const HeaderComponent: React.FC<RouteComponentProps> = (props) => {
                     <li className="nav-item">
                     <Link className='nav-links' to={previousRequests}>View Previous Requests{renderOnCurrentPath('/previous')}</Link>
                     </li>
-                    <li className="nav-item">
-                    <Link className='nav-links' to="/manager">Create New Request{renderOnCurrentPath('/manager')}</Link>
-                    </li>
                     <li>
-                        <Button className='btn-dark' onClick={logout}>Logout</Button>
+                        <Button className='btn-dark nav-btn' onClick={logout}>Logout</Button>
                     </li>
                 </ul>
             </div>

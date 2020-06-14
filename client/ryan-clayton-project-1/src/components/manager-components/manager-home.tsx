@@ -36,7 +36,7 @@ const ManagerHome: React.FC = () => {
                     <Button className="col-12 btn-dark" onClick={() => setModalShow(true)}>Create New Request</Button>
                 </div>
                 <div className="row">
-                    {data.map((e, i) => { return <ManagerCard key={i} content={e}></ManagerCard> })}
+                    {data.map((e, i) => { return <ManagerCard curr = {true} key={i} content={e}></ManagerCard> })}
 
 
 

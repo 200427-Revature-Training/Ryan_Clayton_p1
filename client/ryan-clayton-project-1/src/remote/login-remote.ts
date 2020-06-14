@@ -7,6 +7,7 @@ export const login = async (credentials: any) => {
       console.log(response);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('role', response.data.userRole);
+      localStorage.setItem('id',response.data.id)
       return response.data.userRole;
     }, (error) => {
       console.log(error);

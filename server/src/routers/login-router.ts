@@ -20,7 +20,7 @@ loginRouter.post('', (request, response , next) => {
              role: userRole.role},
             process.env.JWT_KEY,
             {expiresIn:"1h"});
-        response.status(200).json({userRole:userRole.role,token:token});
+        response.status(200).json({userRole:userRole.role,token:token,id:userRole.id});
         next();
     }).catch(err => {
         console.log(err);

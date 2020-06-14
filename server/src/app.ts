@@ -10,8 +10,14 @@ const port = process.env.PORT || 3000;
 app.set('port', port);
 
 // first middleware
-app.use(bodyParser.json());
-
+app.use(bodyParser.json({
+    limit: '50mb'
+  }));
+app.use(bodyParser.urlencoded({
+    limit: '50mb',
+    parameterLimit: 100000,
+    extended: true
+  }));
 
 app.use((request, response, next) => {
     // the express app is open and in middleware2

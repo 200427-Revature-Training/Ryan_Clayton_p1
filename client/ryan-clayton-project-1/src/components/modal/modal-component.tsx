@@ -8,6 +8,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import './modal.css'
+import { submitReq } from '../../remote/content-remote';
 
 
 
@@ -21,6 +22,7 @@ export const ModalComponent: React.FC<ModalProps> = (props) => {
     const [type, setType] = useState('');
     const [value, setValue] = useState('');
     const [description, setDescription]= useState('');
+    const [image, setImage] = useState({});
 
     const handleSelect = (event: React.ChangeEvent<{ value: unknown }>) => {
         setType(event.target.value as string);
@@ -31,7 +33,17 @@ export const ModalComponent: React.FC<ModalProps> = (props) => {
     const handleDescription =(event: React.ChangeEvent<HTMLInputElement>) => {
         setDescription(event.target.value);
     };
-
+    const handleImage=(event: React.ChangeEvent<HTMLInputElement>)=>{
+        if(event.target.files){
+            console.log(event.target.files[0]);
+            setImage(event.target.files[0]);
+        }
+    };
+    const Submit=async ()=>{
+        props.setter(false);
+        await submitReq({type:type,value:value,description:description,image:image,id:localStorage.getItem('id'),token:localStorage.getItem('token')});
+        window.location.reload(false);
+    }
     return (
         <div>
         <Modal
@@ -78,11 +90,14 @@ export const ModalComponent: React.FC<ModalProps> = (props) => {
                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
                         />
                     </FormControl>
+                    <Form.Label>Reciept (Must be PNG file)</Form.Label>
+                    <br></br>
+                    <input type="file" onChange={handleImage}/>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button className="btn btn-dark" onClick={() => props.setter(false)}>Close</Button>
-                <Button className="btn btn-dark">Submit</Button>
+                <Button className="btn btn-dark" onClick={Submit}>Submit</Button>
 
 
             </Modal.Footer>
